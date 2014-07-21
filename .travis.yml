@@ -1,0 +1,26 @@
+language: python
+
+services:
+  - mysql
+  - postgresql
+
+sudo: false
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.4"
+
+env:
+  matrix:
+    - DB=postgres
+    - DB=mysql
+    - DB=sqlite
+
+before_script:
+  - psql -c 'create database pytest_django_casperjs_test;' -U postgres
+  - mysql -e 'create database pytest_django_casperjs_test;'
+
+script:
+  - make develop
+  - make test
