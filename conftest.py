@@ -13,7 +13,7 @@ def pytest_configure(config):
             'USER': 'root',
         })
     elif test_db == 'postgres':
-        os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings_postgres'
+        os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings_postgresql'
         settings.DATABASES['default'].update({
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'USER': 'postgres',
