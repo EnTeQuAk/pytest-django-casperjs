@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 import pkg_resources
 
 try:
@@ -54,7 +53,8 @@ man_pages = [
 
 texinfo_documents = [
     ('index', 'pytest-django-casperjs', u'pytest-django-casperjs Documentation',
-     u'pytest-django-casperjs', 'pytest-django-casperjs', 'Integrate CasperJS with your django tests as a pytest fixture.',
+     u'pytest-django-casperjs', 'pytest-django-casperjs',
+     u'Integrate CasperJS with your django tests as a pytest fixture.',
      'Miscellaneous'),
 ]
 
