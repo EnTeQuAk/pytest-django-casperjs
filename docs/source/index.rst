@@ -11,7 +11,7 @@ pytest-django-casperjs
 
 Integrate CasperJS with your django tests as a pytest fixture.
 
-.. figure:: https://pytest-django-casperjs.readthedocs.org/en/latest/_images/logo.jpeg
+.. figure:: https://pytest-django-casperjs.readthedocs.org/en/latest/_images/logo.jpg
    :align: right
    :target: http://thenounproject.com/term/ghost/52929/
 
