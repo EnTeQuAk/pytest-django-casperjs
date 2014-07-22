@@ -6,7 +6,6 @@ import pytest
 from django.conf import settings as real_settings
 from django.utils.encoding import force_text
 from django.test.client import Client, RequestFactory
-from django.test.testcases import connections_support_transactions
 
 from .app.models import Item
 
@@ -38,11 +37,6 @@ class TestCasperJSLiveServer:
         response_data = urlopen(casper_js + '/item_count/').read()
         assert force_text(response_data) == 'Item count: 1'
 
-    def test_fixture_transactional_db(self, transactional_db, casper_js):
-        Item.objects.create(name='foo')
-        response_data = urlopen(casper_js + '/item_count/').read()
-        assert force_text(response_data) == 'Item count: 1'
-
     @pytest.fixture
     def item(self):
         # This has not requested database access so should fail.
@@ -61,13 +55,5 @@ class TestCasperJSLiveServer:
         return Item.objects.create(name='foo')
 
     def test_item_db(self, item_db, casper_js):
-        response_data = urlopen(casper_js + '/item_count/').read()
-        assert force_text(response_data) == 'Item count: 1'
-
-    @pytest.fixture
-    def item_transactional_db(self, transactional_db):
-        return Item.objects.create(name='foo')
-
-    def test_item_transactional_db(self, item_transactional_db, casper_js):
         response_data = urlopen(casper_js + '/item_count/').read()
         assert force_text(response_data) == 'Item count: 1'
