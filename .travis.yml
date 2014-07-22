@@ -1,7 +1,6 @@
 language: python
 
 services:
-  - mysql
   - postgresql
 
 sudo: false
@@ -14,12 +13,10 @@ python:
 env:
   matrix:
     - DB=postgres
-    - DB=mysql
     - DB=sqlite
 
 before_script:
   - psql -c 'create database pytest_django_casperjs_test;' -U postgres
-  - mysql -e 'create database pytest_django_casperjs_test;'
 
 script:
   - make develop

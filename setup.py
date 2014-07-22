@@ -77,6 +77,8 @@ class PyTest(TestCommand):
         if self.clearcache:
             params['args'].extend(['--clearcache'])
 
+        params['args'].append('src/')
+
         self.test_suite = True
 
         errno = pytest.main(**params)
@@ -101,6 +103,7 @@ setup(
     extras_require={
         'docs': docs_requires,
         'tests': test_requires,
+        'postgresql': ['psycopg2'],
     },
     zip_safe=False,
     license='BSD',

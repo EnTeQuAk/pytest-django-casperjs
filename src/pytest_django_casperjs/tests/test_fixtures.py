@@ -20,8 +20,6 @@ class TestCasperJSLiveServer:
     # Partially based on the LiveServer test case from pytest_django'
 
     pytestmark = [
-        pytest.mark.skipif('django.VERSION[:2] < (1, 4)'),
-        pytest.mark.urls('tests.urls_liveserver'),
         pytest.mark.django_db()
     ]
 

@@ -15,6 +15,8 @@ deps:
 	pip install -e .
 	pip install "file://`pwd`#egg=pytest-django-casperjs[tox]"
 	pip install "file://`pwd`#egg=pytest-django-casperjs[docs]"
+	pip install "file://`pwd`#egg=pytest-django-casperjs[tests]"
+	pip install "file://`pwd`#egg=pytest-django-casperjs[postgresql]"
 
 develop: deps
 
