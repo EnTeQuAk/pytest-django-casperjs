@@ -15,10 +15,6 @@ Integrate CasperJS with your django tests as a pytest fixture.
    :align: right
    :target: http://thenounproject.com/term/ghost/52929/
 
-.. warning::
-
-   This project is under heavy development. Don't use it.
-
 
 More documentation
 ------------------
