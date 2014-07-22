@@ -1,6 +1,6 @@
 include CHANGES README.rst AUTHORS LICENSE Makefile
 recursive-include docs *
-recursive-exclude tests *
+recursive-include src/pytest_django_casperjs/tests *
 global-exclude *.pyc
 global-exclude *.pyo
 prune docs/_build

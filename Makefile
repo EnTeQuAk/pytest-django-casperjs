@@ -19,7 +19,7 @@ deps:
 develop: deps
 
 docs: clean-build
-	sphinx-apidoc --force -o docs/source/modules/ src/pytest-django-casperjs src/pytest-django-casperjs/*/migrations src/pytest-django-casperjs/tests src/pytest-django-casperjs/settings.py
+	sphinx-apidoc --force -o docs/source/modules/ src/pytest_django_casperjs src/pytest_django_casperjs/tests
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 

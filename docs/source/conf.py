@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-import pkg_resources
+import os
+
+os.environ.setdefault(
+    'DJANGO_SETTINGS_MODULE',
+    'pytest_django_casperjs.tests.settings_sqlite')
 
 try:
     import sphinx_rtd_theme
@@ -21,9 +25,9 @@ master_doc = 'index'
 project = u'pytest-django-casperjs'
 copyright = u'2014, Christopher Grebs'
 
-dist = pkg_resources.get_distribution('pytest-django-casperjs')
 
-version = release = dist.version
+version = '0.1'
+release = '0.1'
 
 exclude_patterns = []
 
