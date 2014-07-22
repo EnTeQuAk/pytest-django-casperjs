@@ -59,7 +59,7 @@ class CasperJSLiveServer(LiveServer):
             'load-images': 'no',
             'disk-cache': 'yes' if self.use_phantom_disk_cache else 'no',
             'ignore-ssl-errors': 'yes',
-            'url-base': self.live_server_url
+            'url-base': self.url
         })
 
         cn = settings.SESSION_COOKIE_NAME
