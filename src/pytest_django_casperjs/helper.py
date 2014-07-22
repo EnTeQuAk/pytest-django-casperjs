@@ -40,7 +40,9 @@ class CasperJSLiveServer(LiveServer):
         else:
             self.prefix = ''
 
-    def casper(self, test_filename, cookies=None, **kwargs):
+        self.executable = os.environ.get('CASPER_JS_EXECUTABLE', 'casperjs')
+
+    def run(self, test_filename, cookies=None, **kwargs):
         """CasperJS test invoker.
 
         Takes a test filename (.js) and optional arguments to pass to the
@@ -54,12 +56,10 @@ class CasperJSLiveServer(LiveServer):
 
         :param cookie: ...
         """
-
         kwargs.update({
             'load-images': 'no',
             'disk-cache': 'yes' if self.use_phantom_disk_cache else 'no',
             'ignore-ssl-errors': 'yes',
-            'url-base': self.url
         })
 
         cn = settings.SESSION_COOKIE_NAME
@@ -67,7 +67,7 @@ class CasperJSLiveServer(LiveServer):
         if cookies and cn in cookies:
             kwargs['cookie-' + cn] = cookies[cn].value
 
-        cmd = [self.prefix + 'casperjs', 'test', '--no-colors']
+        cmd = [self.prefix + self.executable, 'test', '--no-colors']
 
         # TODO: make configurable
         base_path = os.path.abspath(os.path.dirname(test_filename))
@@ -77,7 +77,7 @@ class CasperJSLiveServer(LiveServer):
         kwargs['xunit'] = xunit_path
 
         cmd.extend([('--%s=%s' % i) for i in kwargs.iteritems()])
-        cmd.append(test_filename)
+        cmd.append(os.path.abspath(test_filename))
 
         process = Popen(
             cmd,
