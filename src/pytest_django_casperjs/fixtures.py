@@ -21,9 +21,3 @@ def casper_js(request):
     request.addfinalizer(server.stop)
 
     return server
-
-
-@pytest.fixture(autouse=True, scope='function')
-def _casper_js_live_server_helper(request):
-    if 'capser_js' in request.funcargnames:
-        request.getfuncargvalue('transactional_db')
