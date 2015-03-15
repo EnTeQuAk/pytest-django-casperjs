@@ -1,4 +1,4 @@
-include CHANGES README.rst AUTHORS LICENSE Makefile
+include CHANGES README.rst LICENSE Makefile
 recursive-include docs *
 recursive-include src/pytest_django_casperjs/tests *
 global-exclude *.pyc

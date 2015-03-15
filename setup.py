@@ -1,16 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
+import codecs
 import sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
-with open('README.rst') as fobj:
-    readme = fobj.read()
+version = '0.1.0'
 
-with open('CHANGES') as fobj:
-    history = fobj.read()
-    history.replace('.. :changelog:', '')
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist upload')
+    os.system('python setup.py bdist_wheel upload')
+    print('You probably want to also tag the version now:')
+    print('  git tag -a %s -m "version %s"' % (version, version))
+    print('  git push --tags')
+    sys.exit()
+
+
+def read(*parts):
+    filename = os.path.join(os.path.dirname(__file__), *parts)
+    with codecs.open(filename, encoding='utf-8') as fobj:
+        return fobj.read()
 
 
 test_requires = [
@@ -41,55 +53,15 @@ docs_requires = [
 ]
 
 
-class PyTest(TestCommand):
-    user_options = [
-        ('cov=', None, 'Run coverage'),
-        ('cov-xml=', None, 'Generate junit xml report'),
-        ('cov-html=', None, 'Generate junit html report'),
-        ('junitxml=', None, 'Generate xml of test results'),
-        ('clearcache', None, 'Clear cache first')
-    ]
-    boolean_options = ['clearcache']
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.cov = None
-        self.cov_xml = False
-        self.cov_html = False
-        self.junitxml = None
-        self.clearcache = False
-
-    def run_tests(self):
-        import pytest
-
-        params = {'args': self.test_args}
-
-        if self.cov is not None:
-            params['plugins'] = ['cov']
-            params['args'].extend(
-                ['--cov', self.cov, '--cov-report', 'term-missing'])
-            if self.cov_xml:
-                params['args'].extend(['--cov-report', 'xml'])
-            if self.cov_html:
-                params['args'].extend(['--cov-report', 'html'])
-        if self.junitxml is not None:
-            params['args'].extend(['--junitxml', self.junitxml])
-        if self.clearcache:
-            params['args'].extend(['--clearcache'])
-
-        params['args'].append('src/')
-
-        self.test_suite = True
-
-        errno = pytest.main(**params)
-        sys.exit(errno)
+readme =  read('README.rst')
+changelog = read('CHANGELOG.rst').replace('.. :changelog:', '')
 
 
 setup(
     name='pytest-django-casperjs',
     version='0.1.0',
     description='Integrate CasperJS with your django tests as a pytest fixture.',
-    long_description=readme + '\n\n' + history,
+    long_description=readme + '\n\n' + changelog,
     author='Christopher Grebs',
     author_email='cg@webshox.org',
     url='https://github.com/EnTeQuAk/pytest-django-casperjs/',
@@ -99,11 +71,11 @@ setup(
     test_suite='.',
     tests_require=test_requires,
     install_requires=install_requires,
-    cmdclass={'test': PyTest},
     extras_require={
         'docs': docs_requires,
         'tests': test_requires,
         'postgresql': ['psycopg2'],
+        'mysql': ['PyMySQL'],
     },
     zip_safe=False,
     license='BSD',

@@ -1,4 +1,4 @@
-.PHONY: clean-pyc clean-build clean deps develop docs lint test test-coverage test-all
+.PHONY: clean-pyc clean-build clean deps develop docs lint coverage tests
 
 help:
 	@echo "clean-build - remove build artifacts"
@@ -17,8 +17,7 @@ deps:
 	pip install "file://`pwd`#egg=pytest-django-casperjs[docs]"
 	pip install "file://`pwd`#egg=pytest-django-casperjs[tests]"
 	pip install "file://`pwd`#egg=pytest-django-casperjs[postgresql]"
-
-develop: deps
+	pip install "file://`pwd`#egg=pytest-django-casperjs[mysql]"
 
 docs: clean-build
 	sphinx-apidoc --force -o docs/source/modules/ src/pytest_django_casperjs src/pytest_django_casperjs/tests
@@ -35,11 +34,11 @@ clean-build:
 lint:
 	flake8 pytest-django-casperjs --ignore='E122,E124,E125,E126,E128,E501,F403' --exclude="**/migrations/**"
 
-test:
-	python setup.py test --clearcache
+tests:
+	py.test src/
 
-test-coverage:
-	python setup.py test --clearcache --cov {toxinidir}/src/pytest-django-casperjs
+coverage:
+	py.test --clearcache --cov {toxinidir}/src/pytest-django-casperjs
 
 test-all:
 	tox

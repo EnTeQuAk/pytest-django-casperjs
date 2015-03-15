@@ -2,6 +2,7 @@ language: python
 
 services:
   - postgresql
+  - mysql
 
 sudo: false
 
@@ -11,13 +12,22 @@ python:
   - "3.4"
 
 env:
+  - TOXENV=py26-1.6.x
+  - TOXENV=py27-1.6.x
+  - TOXENV=py27-1.7.x
+  - TOXENV=py34-1.6.x
+  - TOXENV=py34-1.7.x
   matrix:
     - DB=postgres
     - DB=sqlite
+    - DB=mysql
+
+install:
+  - pip install tox
 
 before_script:
+  - mysql -e 'create database pytest_django_casperjs_test;'
   - psql -c 'create database pytest_django_casperjs_test;' -U postgres
 
 script:
-  - make develop
-  - make test
+  - tox -e "$TOXENV"
