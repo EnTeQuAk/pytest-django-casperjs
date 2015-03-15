@@ -12,25 +12,25 @@ python:
   - "3.4"
 
 env:
-  - TOXENV=py26-1.6.x DB=postgresql
-  - TOXENV=py26-1.6.x DB=mysql
-  - TOXENV=py26-1.6.x DB=sqlite
+  - DJANGO_VERSION=1.6.x DB=postgresql
+  - DJANGO_VERSION=1.6.x DB=mysql
+  - DJANGO_VERSION=1.6.x DB=sqlite
 
-  - TOXENV=py27-1.6.x DB=postgresql
-  - TOXENV=py27-1.6.x DB=mysql
-  - TOXENV=py27-1.6.x DB=sqlite
+  - DJANGO_VERSION=1.6.x DB=postgresql
+  - DJANGO_VERSION=1.6.x DB=mysql
+  - DJANGO_VERSION=1.6.x DB=sqlite
 
-  - TOXENV=py27-1.7.x DB=postgresql
-  - TOXENV=py27-1.7.x DB=mysql
-  - TOXENV=py27-1.7.x DB=sqlite
+  - DJANGO_VERSION=1.7.x DB=postgresql
+  - DJANGO_VERSION=1.7.x DB=mysql
+  - DJANGO_VERSION=1.7.x DB=sqlite
 
-  - TOXENV=py34-1.6.x DB=postgresql
-  - TOXENV=py34-1.6.x DB=mysql
-  - TOXENV=py34-1.6.x DB=sqlite
+  - DJANGO_VERSION=1.6.x DB=postgresql
+  - DJANGO_VERSION=1.6.x DB=mysql
+  - DJANGO_VERSION=1.6.x DB=sqlite
 
-  - TOXENV=py34-1.7.x DB=postgresql
-  - TOXENV=py34-1.7.x DB=mysql
-  - TOXENV=py34-1.7.x DB=sqlite
+  - DJANGO_VERSION=1.7.x DB=postgresql
+  - DJANGO_VERSION=1.7.x DB=mysql
+  - DJANGO_VERSION=1.7.x DB=sqlite
 
 install:
   - pip install tox
@@ -40,4 +40,4 @@ before_script:
   - psql -c 'create database pytest_django_casperjs_test;' -U postgres
 
 script:
-  - tox -e "$TOXENV"
+  - tox -e "$TRAVIS_PYTHON_VERSION-$DJANGO_VERSION"
