@@ -59,7 +59,7 @@ changelog = read('CHANGELOG.rst').replace('.. :changelog:', '')
 
 setup(
     name='pytest-django-casperjs',
-    version='0.1.0',
+    version=version,
     description='Integrate CasperJS with your django tests as a pytest fixture.',
     long_description=readme + '\n\n' + changelog,
     author='Christopher Grebs',
