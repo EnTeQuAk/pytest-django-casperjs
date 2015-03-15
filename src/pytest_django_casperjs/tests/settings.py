@@ -13,15 +13,6 @@ INSTALLED_APPS = [
 STATIC_URL = '/static/'
 SECRET_KEY = 'foobar'
 
-# Used to construct unique test database names to allow detox to run multiple
-# versions at the same time
-uid = os.getenv('UID', '')
-
-if uid:
-    db_suffix = '_%s' % uid
-else:
-    db_suffix = ''
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
