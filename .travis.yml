@@ -12,15 +12,25 @@ python:
   - "3.4"
 
 env:
-  - TOXENV=py26-1.6.x
-  - TOXENV=py27-1.6.x
-  - TOXENV=py27-1.7.x
-  - TOXENV=py34-1.6.x
-  - TOXENV=py34-1.7.x
-  matrix:
-    - DB=postgres
-    - DB=sqlite
-    - DB=mysql
+  - TOXENV=py26-1.6.x DB=postgresql
+  - TOXENV=py26-1.6.x DB=mysql
+  - TOXENV=py26-1.6.x DB=sqlite
+
+  - TOXENV=py27-1.6.x DB=postgresql
+  - TOXENV=py27-1.6.x DB=mysql
+  - TOXENV=py27-1.6.x DB=sqlite
+
+  - TOXENV=py27-1.7.x DB=postgresql
+  - TOXENV=py27-1.7.x DB=mysql
+  - TOXENV=py27-1.7.x DB=sqlite
+
+  - TOXENV=py34-1.6.x DB=postgresql
+  - TOXENV=py34-1.6.x DB=mysql
+  - TOXENV=py34-1.6.x DB=sqlite
+
+  - TOXENV=py34-1.7.x DB=postgresql
+  - TOXENV=py34-1.7.x DB=mysql
+  - TOXENV=py34-1.7.x DB=sqlite
 
 install:
   - pip install tox
