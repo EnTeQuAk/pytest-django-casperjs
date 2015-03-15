@@ -13,6 +13,8 @@ def pytest_configure(config):
             'NAME': 'pytest_django_casperjs_test',
         })
     elif test_db == 'mysql':
+        import pymysql
+        pymysql.install_as_MySQLdb()
         settings.DATABASES['default'].update({
             'ENGINE': 'django.db.backends.mysql',
             'USER': 'root',
