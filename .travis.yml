@@ -7,30 +7,26 @@ services:
 sudo: false
 
 python:
-  - "2.6"
-  - "2.7"
-  - "3.4"
+  - 2.6
+  - 2.7
+  - 3.4
 
 env:
   - DJANGO_VERSION=1.6.x DB=postgresql
   - DJANGO_VERSION=1.6.x DB=mysql
   - DJANGO_VERSION=1.6.x DB=sqlite
 
-  - DJANGO_VERSION=1.6.x DB=postgresql
-  - DJANGO_VERSION=1.6.x DB=mysql
-  - DJANGO_VERSION=1.6.x DB=sqlite
-
   - DJANGO_VERSION=1.7.x DB=postgresql
   - DJANGO_VERSION=1.7.x DB=mysql
   - DJANGO_VERSION=1.7.x DB=sqlite
 
-  - DJANGO_VERSION=1.6.x DB=postgresql
-  - DJANGO_VERSION=1.6.x DB=mysql
-  - DJANGO_VERSION=1.6.x DB=sqlite
-
-  - DJANGO_VERSION=1.7.x DB=postgresql
-  - DJANGO_VERSION=1.7.x DB=mysql
-  - DJANGO_VERSION=1.7.x DB=sqlite
+  exclude:
+    - python: 2.6
+      env: DJANGO_VERSION=1.7.x DB=postgresql
+    - python: 2.6
+      env: DJANGO_VERSION=1.7.x DB=sqlite
+    - python: 2.6
+      env: DJANGO_VERSION=1.7.x DB=mysql
 
 install:
   - pip install tox
